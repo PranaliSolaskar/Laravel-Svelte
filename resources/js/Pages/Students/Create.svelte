@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 export let classesid;
+export let sections;
 console.log(classesid); 
 let form = useForm({
   name: null,
@@ -14,7 +15,7 @@ let form = useForm({
 })
 
 function submit() {
-  $form.post('/login')
+  $form.post(route('/students/savedata'));
 }
 
 </script>
@@ -27,7 +28,7 @@ function submit() {
       <label for="name">Name:</label>
       <input type="text" bind:value={$form.name} class="form-control"/><br>
       {#if $form.errors.email}
-        <div class="form-error">{$form.errors.name}</div>
+        <div class="text-red-500">{$form.errors.name}</div>
       {/if}
     </div>
     <div class="form-group">
@@ -55,15 +56,18 @@ function submit() {
     <label for="class_id">Class Id</label>
     <select id="class_id" bind:value={$form.class_id}>
       <option value="">Select a Class</option>
-      <option value="1">class 1</option>
-      <option value="2">class 2</option>
+      {#each classesid as classe}
+        <option value={classe.id}>
+          {classe.name}
+        </option>
+      {/each}
     </select><br><br>
 
     <label for="section_id">Section Id</label>
     <select id="section_id" bind:value={$form.section_id}>
       <option value="">Select a Section</option>
-      <option value="1">Section A</option>
-      <option value="2">Section B</option>
+      <option value="section A">Section A</option>
+      <option value="Section B">Section B</option>
     </select><br><br>
 
     <button type="submit" disabled={$form.processing} class="form-control">Submit</button>

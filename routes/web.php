@@ -23,3 +23,4 @@ Route::get('/stud',[studentcontroller::class,'index']);
     return Inertia::render('Students/Create');
 })->name('students.create');*/
 Route::get('/students/create', [studentcontroller::class,'create']);
+Route::get('/students/savedata', [studentcontroller::class,'store']);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\classe;
+use App\Models\Section;
 use Inertia\Inertia;
 
 class studentcontroller extends Controller
@@ -24,9 +25,13 @@ class studentcontroller extends Controller
 
     public function create()
     {
-        echo"kkkkkk";
         $classid=classe::all();
-        echo"kkkkkkoooo";
-        return Inertia::render('Students/Create',['classesid'=>$classid,]);
+        $sectionid=Section::all();
+        return Inertia::render('Students/Create',['classesid'=>$classid,'sections'=>$sectionid,]);
+    }
+
+    public function store(StoreStudentRequest $request)
+    {
+        dd($request->all());
     }
 }
