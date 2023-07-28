@@ -18,8 +18,7 @@ class classeseeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        
+    {        
         classe::factory()
             ->count(10)
             ->sequence(fn ($sequence) => ['name' => 'Class ' . $sequence->index + 1])

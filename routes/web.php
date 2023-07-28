@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\studentcontroller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +17,9 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('Home');
 });
+
+Route::get('/stud',[studentcontroller::class,'index']);
+/*Route::get('/students/create', function () {
+    return Inertia::render('Students/Create');
+})->name('students.create');*/
+Route::get('/students/create', [studentcontroller::class,'create']);
