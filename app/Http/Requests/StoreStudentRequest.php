@@ -13,7 +13,7 @@ class StoreStudentRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->check();
+        return true;
     }
 
     /**
@@ -28,7 +28,8 @@ class StoreStudentRequest extends FormRequest
             'class_id'=>['required','exits:classes,id'],
             'section_id'=>['required','exits:sections,id'],
             'phone_number'=>['required','string'],
-            'email'=>['required','email','unique:students,email']
+            'email'=>['required','email','unique:students,email'],
+            'address'=>['required','string'],
         ];
     }
 }

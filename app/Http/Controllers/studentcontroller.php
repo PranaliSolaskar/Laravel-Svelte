@@ -30,8 +30,19 @@ class studentcontroller extends Controller
         return Inertia::render('Students/Create',['classesid'=>$classid,'sections'=>$sectionid,]);
     }
 
-    public function store(StoreStudentRequest $request)
+    public function store(Request $request)
     {
-        dd($request->all());
+        // Validate the incoming request data
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'address' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:20',
+            'class_id' => 'required|integer',
+            'section_id' => 'required|string|max:255',
+        ]);
+        
+        Student::create($request->all());
+        return response()->json(['message' => 'Student data saved successfully'], 201);
     }
 }
