@@ -24,3 +24,4 @@ Route::get('/stud',[studentcontroller::class,'index']);
 })->name('students.create');*/
 Route::get('/students/create', [studentcontroller::class,'create']);
 Route::post('/students/savedata', [studentcontroller::class,'store']);
+Route::post('/students/deletedata', [studentcontroller::class,'deleteStudent']);

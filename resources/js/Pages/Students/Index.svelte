@@ -2,9 +2,11 @@
     export let students;
     console.log(students);
 
+    import axios from 'axios';
     import { Router, Route ,Link } from "svelte-routing";    
     import { InertiaLink } from '@inertiajs/inertia-svelte';
     let currentpage=1;
+    let sid=0;
     function nextpage()
     {
         if(currentpage<countPage())
@@ -39,7 +41,21 @@
     }
     const createStudentRoute = '/students/create.svelte';
     export let studentscreate;
-    
+    function deleteStudent(sid)
+    {
+        console.log("delte", {sid}); 
+        axios.post('/students/deletedata', {sid})
+        .then((response) => {
+            console.log('Form submitted successfully!', response.data);
+        })
+        .catch((error) => {
+            console.error('Error submitting form:', error);
+        });
+    }
+    function updateStudent(sid)
+    {
+        console.log("update student", sid);
+    }
 </script>
 
 <h1>Hello Pranali </h1>
@@ -64,6 +80,10 @@
         <td>{student.email}</td>
         <td>{student.address}</td>
         <td>{student.phone_number}</td>
+        <td>
+          <button type="button" class="add-student-button" on:click={() => deleteStudent(student.id)}>delete</button>
+          <button type="button" class="add-student-button" on:click={() => updateStudent(student.id)}>update</button>
+        </td>
     </tr>
   {/each}
 </table>

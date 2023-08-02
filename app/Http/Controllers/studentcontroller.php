@@ -45,4 +45,16 @@ class studentcontroller extends Controller
         Student::create($request->all());
         return response()->json(['message' => 'Student data saved successfully'], 201);
     }
+   
+    public function deleteStudent(Request $request)
+    {
+        $id = $request->input('sid');
+        $student = Student::find($id);
+        if ($student) {
+            $student->delete();
+            return response()->json(['message' => 'Student deleted successfully']);
+        } else {
+            return response()->json(['message' => 'Student not found'], 404);
+        }
+    }
 }
